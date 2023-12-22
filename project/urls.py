@@ -18,6 +18,10 @@ from django.contrib import admin
 from django.urls import path
 from random import random
 from django.http import HttpResponse
+from app_datetime.views import datetime_view
+from app_weather.views import current_weather_view
+from store.views import products_view
+from store.views import shop_view
 
 def random_view(request):
     if request.method == "GET":
@@ -27,4 +31,8 @@ def random_view(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('random/', random_view),
+    path('datetime/', datetime_view),
+    path('weather/', current_weather_view),
+    path('product/', products_view),
+    path('', shop_view)
 ]
