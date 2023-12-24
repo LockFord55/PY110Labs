@@ -22,7 +22,7 @@ DIRECTION_TRANSFORM = {
     'C': 'штиль',
 }
 
-def current_weather_apiweather(city) -> str:
+def current_weather_apiweather(lat, lon):
     """Данная функция принимает 1 аргумент: название города на английском
     языке и возвращает:
     1) Название города
@@ -36,7 +36,7 @@ def current_weather_apiweather(city) -> str:
     9) Порывы ветра, в м/с
     10) Направление ветра."""
     key = "6719b1354b964e308af85231232112"
-    url = f"https://api.weatherapi.com/v1/current.json?key={key}&q={city}"
+    url = f"https://api.weatherapi.com/v1/current.json?key={key}&q={lat},{lon}"
     response = requests.get(url)
     data = response.json()
     return data
