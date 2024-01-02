@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse, HttpResponseNotFound
 from .models import DATABASE
-from logic.services import filtering_category, view_in_cart, add_to_cart, remove_from_cart
+from logic.services import filtering_category, view_in_cart, add_to_cart, remove_from_cart, add_to_wishlist
 from django.contrib.auth import get_user
 from django.contrib.auth.decorators import login_required
 
@@ -74,7 +74,8 @@ def cart_view(request):
             product['quantity'] = quantity
             product["price_total"] = f"{quantity * product['price_after']:.2f}"
             products.append(product)
-        return render(request, "store/cart.html", context={"products": products})
+        return render(request, "store/cart.html",
+                      context={"products": products})
 
 
 @login_required(login_url='login:login_view')
@@ -159,3 +160,4 @@ def cart_remove_view(request, id_product):
             return redirect("store:cart_view")
 
         return HttpResponseNotFound("Неудачное удаление из корзины")
+
